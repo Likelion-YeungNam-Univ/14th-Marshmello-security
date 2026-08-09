@@ -1,0 +1,45 @@
+spring:
+  application:
+    name: davey-auth-stage-java17
+
+  security:
+    oauth2:
+      client:
+        registration:
+          oidc:
+            provider: oidc
+            client-id: ${OIDC_CLIENT_ID:change-me}
+            client-secret: ${OIDC_CLIENT_SECRET:change-me}
+            authorization-grant-type: authorization_code
+            redirect-uri: "{baseUrl}/login/oauth2/code/{registrationId}"
+            scope: ${OIDC_SCOPES:openid,email}
+        provider:
+          oidc:
+            issuer-uri: ${OIDC_ISSUER_URI:https://accounts.google.com}
+
+server:
+  port: ${SERVER_PORT:8080}
+  forward-headers-strategy: framework
+  servlet:
+    session:
+      timeout: 15m
+      cookie:
+        name: JSESSIONID
+        http-only: true
+        secure: ${SESSION_COOKIE_SECURE:false}
+        same-site: lax
+
+app:
+  oidc:
+    google-offline-access: ${OIDC_GOOGLE_OFFLINE_ACCESS:false}
+
+  authorization:
+    allowed-emails: ${APP_ALLOWED_EMAILS:}
+    allowed-email-domains: ${APP_ALLOWED_EMAIL_DOMAINS:}
+    allowed-subjects: ${APP_ALLOWED_SUBJECTS:}
+    require-verified-email: ${APP_REQUIRE_VERIFIED_EMAIL:true}
+
+logging:
+  level:
+    root: INFO
+    org.springframework.security: INFO

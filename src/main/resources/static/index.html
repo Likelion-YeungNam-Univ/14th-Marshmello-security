@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>OIDC model gate test</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <main>
+    <h1>OIDC → Model Gate</h1>
+    <p>모델 호출 없이 인증/인가 경계까지만 확인.</p>
+
+    <div class="actions">
+      <a class="button" href="/oauth2/authorization/oidc">OIDC 로그인</a>
+      <button id="me">/api/me</button>
+      <button id="gate">/api/model-gate</button>
+      <button id="token">/api/token-status</button>
+      <button id="logout">POST /logout</button>
+    </div>
+
+    <pre id="output">ready</pre>
+  </main>
+  <script src="/app.js"></script>
+</body>
+</html>
